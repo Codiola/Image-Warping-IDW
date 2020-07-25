@@ -81,12 +81,10 @@ for ii=1:h
             im3(new_p_x,new_p_y,:) = im2(ii,jj,:);
         
         end
-        
     end
 end
 
 im2 = im3;
-
 im2(:,:,1) = medfilt2(im3(:,:,1),[5,5]);
 im2(:,:,2) = medfilt2(im3(:,:,2),[5,5]);
 im2(:,:,3) = medfilt2(im3(:,:,3),[5,5]);
