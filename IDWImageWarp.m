@@ -3,6 +3,7 @@ function im2 = IDWImageWarp(im, psrc, pdst)
 % get image (matrix) size
 [h,w,dim] = size(im);
 im2 = im;
+[X,Y] = meshgrid(1:w,1:h);
 
 %% Compute sigma and initialze some variables
 n = size(psrc,1);
@@ -79,12 +80,19 @@ for ii=1:h
                 new_p_y = 1;
             end
             im3(new_p_x,new_p_y,:) = im2(ii,jj,:);
+            X(ii,jj) = new_p_x;
+            Y(ii,jj) = new_p_y;
         
         end
     end
 end
 
+figure(2)
+axis off
+Z = zeros(h,w);
+S = surface(X,Y,Z,im2,'FaceColor','texturemap','EdgeColor','none');
 im2 = im3;
+
 im2(:,:,1) = medfilt2(im3(:,:,1),[5,5]);
 im2(:,:,2) = medfilt2(im3(:,:,2),[5,5]);
 im2(:,:,3) = medfilt2(im3(:,:,3),[5,5]);
