@@ -79,7 +79,6 @@ for ii=1:h
             if new_p_y < 1
                 new_p_y = 1;
             end
-            im3(new_p_x,new_p_y,:) = im2(ii,jj,:);
             X(ii,jj) = new_p_x;
             Y(ii,jj) = new_p_y;
         
@@ -87,12 +86,11 @@ for ii=1:h
     end
 end
 
-figure(2)
+subplot(122)
 axis off
 Z = zeros(h,w);
 S = surface(X,Y,Z,im2,'FaceColor','texturemap','EdgeColor','none');
-im2 = im3;
+direction = [0 0 1];
+rotate(S,direction,-90);
 
-im2(:,:,1) = medfilt2(im3(:,:,1),[5,5]);
-im2(:,:,2) = medfilt2(im3(:,:,2),[5,5]);
-im2(:,:,3) = medfilt2(im3(:,:,3),[5,5]);
+im2 = im*0;
